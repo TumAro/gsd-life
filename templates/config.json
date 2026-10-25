@@ -1,0 +1,13 @@
+{
+  "paths": {
+    "self": ".life/self.md",
+    "research": ".life/phases",
+    "decisions": ".life/phases",
+    "log": ".life/log.md"
+  },
+  "research": {
+    "firecrawl_local_start": "",
+    "languages": ["en"]
+  },
+  "checkin_cadence_days": 7
+}

@@ -1,0 +1,17 @@
+{
+  "name": "gsd-life",
+  "owner": {
+    "name": "tumaro"
+  },
+  "metadata": {
+    "description": "GSD-style planning for life goals, backed by real-human evidence and thinking models."
+  },
+  "plugins": [
+    {
+      "name": "gsd-life",
+      "description": "Discuss, research, plan, act, check in, reflect on life goals.",
+      "source": "./",
+      "category": "productivity"
+    }
+  ]
+}

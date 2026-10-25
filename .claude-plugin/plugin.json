@@ -1,0 +1,36 @@
+{
+  "name": "gsd-life",
+  "version": "0.1.0",
+  "description": "Get Stuff Done for life: discuss, research what works for real people, plan, act, check in, reflect. Thinking models built in.",
+  "author": {
+    "name": "tumaro",
+    "email": "contact.tumins@gmail.com"
+  },
+  "homepage": "https://github.com/TumAro/gsd-life",
+  "repository": "https://github.com/TumAro/gsd-life",
+  "license": "MIT",
+  "keywords": [
+    "life",
+    "planning",
+    "goals",
+    "habits",
+    "research",
+    "thinking-models",
+    "obsidian",
+    "llm-wiki"
+  ],
+  "userConfig": {
+    "firecrawl_api_url": {
+      "type": "string",
+      "title": "Firecrawl API URL",
+      "description": "Firecrawl endpoint for web research. Cloud: https://api.firecrawl.dev. Self-hosted: for example http://localhost:3002.",
+      "default": "https://api.firecrawl.dev"
+    },
+    "firecrawl_api_key": {
+      "type": "string",
+      "title": "Firecrawl API key",
+      "description": "Needed for Firecrawl cloud. Leave empty for a self-hosted instance. Without Firecrawl, research falls back to WebSearch and WebFetch.",
+      "sensitive": true
+    }
+  }
+}
