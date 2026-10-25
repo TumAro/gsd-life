@@ -1,7 +1,0 @@
-// Positive control (#5170): a gate verb entry that ends the process itself.
-import { declareGateExit } from './gate-exit.cjs';
-
-export function cmdFixtureVerb(passed: boolean): void {
-  declareGateExit({ outcome: passed ? 'pass' : 'block' }, 'status');
-  if (!passed) process.exit(1);
-}
