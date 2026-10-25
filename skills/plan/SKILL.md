@@ -13,6 +13,8 @@ Orchestrate; do not write the plan yourself. Paths: `${CLAUDE_PLUGIN_ROOT}/refer
 
 Phase = argument, else STATE focus phase. Require the phase in ROADMAP.md. If `CONTEXT.md` is missing, ask: run `/gsd-life:discuss NN` first (recommended) or plan with everything open to judgment.
 
+If `PLAN.md` already exists and no `--gaps`: ask whether to re-check it (skip to step 4), revise it, or replan from scratch. Never overwrite a plan silently.
+
 ## 2. Research
 
 If `RESEARCH.md` is missing and no `--skip-research`: run the `/gsd-life:research NN` flow (scope questions, access gate, researcher, one quiz). `--gaps` skips research and reads the latest CHECKINS.md gaps instead.
