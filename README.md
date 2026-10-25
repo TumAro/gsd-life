@@ -16,9 +16,27 @@ You do the actions. Claude thinks, researches, plans, tracks and pushes back.
 /plugin install gsd-life@gsd-life
 ```
 
-`/gsd-life:setup` checks for `watch@claude-video` (video research) and installs it with your OK. Firecrawl MCP ships in the plugin; on enable you are asked for a Firecrawl URL and key (leave the key empty for self-hosted, or skip both and research falls back to WebSearch). Then run `/gsd-life:setup` once per folder.
+Then, once per folder where you keep your life notes:
 
-Optional system tools for video research: `yt-dlp`, `ffmpeg`.
+```text
+/gsd-life:setup              # state in .life/
+/gsd-life:setup --wiki wiki  # or connect an Obsidian vault / LLM wiki
+```
+
+Try it without installing: `claude --plugin-dir /path/to/gsd-life`.
+
+### Research dependencies
+
+None of these are required. Missing ones make research thinner, never block it; `/gsd-life:setup` reports which work.
+
+| Dependency | What it adds | How |
+|---|---|---|
+| Firecrawl MCP | search and clean page scraping | Ships in the plugin. Cloud: set `firecrawl_api_key`. Self-hosted: set `firecrawl_api_url` (e.g. `http://localhost:3002`) and keep the instance running. Change later with `claude plugin configure gsd-life`, then restart. |
+| `watch@claude-video` | watching video retrospectives | `/gsd-life:setup` offers to install it. If installed but disabled: `claude plugin enable watch@claude-video`. |
+| `yt-dlp`, `ffmpeg` | video search and frames | system package manager |
+| WebSearch / WebFetch | fallback | built in |
+
+`watch` is deliberately not a hard plugin dependency: an unresolved hard dependency disables the whole plugin.
 
 ## The loop
 
@@ -36,6 +54,19 @@ Optional system tools for video research: `yt-dlp`, `ffmpeg`.
 | `/gsd-life:capture <text>` | inbox without losing focus |
 
 Start with `/gsd-life:next`.
+
+**Expect:** `new`, `discuss`, `checkin`, `reflect` take a few minutes. `plan` is slow on purpose, about 15 minutes for research and planning plus up to 10 for the checker loop, because it reads real reports instead of guessing.
+
+## Example
+
+A tested run of goal "run 5 km without stopping":
+
+- **new** turned "start running" into a dated success test and 4 phases, and pulled past attempts from the self profile (both quit in week 2 with shin pain).
+- **discuss** locked 12 decisions and flagged "6:30am runs" against a profile note saying mornings are unreliable.
+- **research** read 17 beginner threads, NHS guidance and a cadence study. Pattern: full rest then restart at the same load repeats the injury.
+- **plan** led with one 15-minute run/walk this Tuesday. The checker blocked the first draft (late gym nights would cut sleep before 6:30 runs); the revision passed.
+- **checkin** traced a missed run to a 10pm gym session, not the morning slot, and changed one thing: two evening alarms.
+- **reflect** recorded "mornings work when the gym ends early" as an exception in the self profile.
 
 ## Files
 
@@ -76,7 +107,18 @@ agents/           life-researcher, life-planner, life-plan-checker
 templates/        .life/ artifacts
 references/       paths, evidence method, thinking-model map
 scripts/check.sh  layout validation
+docs/superpowers/ design spec and implementation plan
 ```
+
+## Develop
+
+```bash
+bash scripts/check.sh          # frontmatter, references, manifests
+claude plugin validate .       # Claude Code's own validator
+claude --plugin-dir . -p "/gsd-life:next --status"
+```
+
+Skills reference plugin files through `${CLAUDE_PLUGIN_ROOT}`. Thinking skills are not model-invocable; loop skills read their `SKILL.md` and follow it (see `references/thinking-map.md`).
 
 ## License
 
